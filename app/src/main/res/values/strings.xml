@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">My Github User</string>
     <string name="search">Search</string>
+    <string name="Fav_user">Favorite User</string>
     <string name="search_hint">Enter Username...</string>
+    <string name="tab_text_1">Followers</string>
+    <string name="tab_text_2">Following</string>
+    <string name="content_descPhoto">desc..</string>
+    <string name="data_not_found">Oopps..Data Not Found</string>
+
 </resources>

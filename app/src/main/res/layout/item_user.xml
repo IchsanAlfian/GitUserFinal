@@ -10,22 +10,23 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="16dp"
+        app:civ_border_color="@color/blueDark"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:textStyle="bold"
-
-        android:textSize="20dp"
-        android:fontFamily="sans-serif-black"
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:textColor="@color/blueDark"
+        android:textSize="23sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="TextView" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

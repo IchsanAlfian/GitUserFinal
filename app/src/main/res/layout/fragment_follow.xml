@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/basic"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".ui.fragment.FollowFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvUser"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/rvFollow"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -31,34 +31,33 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436"
+        app:layout_constraintVertical_bias="0.193"
         tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/IV_errorMSG"
         android:layout_width="57dp"
         android:layout_height="53dp"
-        android:src="@drawable/baseline_search_off"
+        android:src="@drawable/baseline_no_accounts_24"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_errorMSG"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/tv_errorMSG"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.374"
+        app:layout_constraintVertical_bias="0.122"
         tools:ignore="ContentDescription,ImageContrastCheck"
         tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="74dp"
-        android:layout_height="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>
