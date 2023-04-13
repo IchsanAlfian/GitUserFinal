@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ichsanalfian.mygithubuser.databinding.ItemUserBinding
 import com.ichsanalfian.mygithubuser.model.ItemsItem
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 class UserAdapter(private val listUser: List<ItemsItem>) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
@@ -36,13 +35,13 @@ class UserAdapter(private val listUser: List<ItemsItem>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val userBinding = ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val userBinding =
+            ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(userBinding)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bind(listUser[position])
-
 
     }
 

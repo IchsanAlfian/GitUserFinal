@@ -43,7 +43,6 @@ class DetailuserViewModel : ViewModel() {
                     _isLoading.value = false
                     Log.d("DetailUserViewModel", "onFailure: ${t.message.toString()}")
                 }
-
             })
     }
 
@@ -92,8 +91,6 @@ class DetailuserViewModel : ViewModel() {
                 Log.e("DetailUserViewModel", "onFailure: ${t.message.toString()}")
                 t.printStackTrace()
             }
-
         })
     }
-
 }

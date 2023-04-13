@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">My Github User</string>
+    <string name="title_FavUser">Favorite User</string>
+    <string name="detail_User">Detail Github User</string>
     <string name="search">Search</string>
+    <string name="toogleButton">ToggleButton</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="settings">Settings</string>
     <string name="Fav_user">Favorite User</string>
     <string name="search_hint">Enter Username...</string>
     <string name="tab_text_1">Followers</string>

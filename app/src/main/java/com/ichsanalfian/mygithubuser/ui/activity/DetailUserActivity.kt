@@ -1,12 +1,12 @@
 package com.ichsanalfian.mygithubuser.ui.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ichsanalfian.mygithubuser.R
@@ -32,6 +32,10 @@ class DetailUserActivity : AppCompatActivity() {
         val sectionPagerAdapter = SectionPagerAdapter(this)
         sectionPagerAdapter.username = username.toString()
         binding.viewPager.adapter = sectionPagerAdapter
+        supportActionBar?.apply {
+            title = getString(R.string.detail_User)
+            setDisplayHomeAsUpEnabled(true)
+        }
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
@@ -51,31 +55,27 @@ class DetailUserActivity : AppCompatActivity() {
                         .centerCrop()
                         .into(ivProfileUser)
                 }
-
+                avatarUrl = data.avatarUrl
             }
         }
         detailViewModel.isLoading.observe(this) {
             showLoading(it)
         }
         factory = ViewModelFactory.getInstance(this)
+        favViewModel.getUserFavorited().observe(this) { listFavorite ->
 
-        favViewModel.getFavoritedUser().observe(this){
-            listFavorite ->
-            val isFavorited = listFavorite.any{
+            val isFavorited = listFavorite.any {
                 it.username == username
-
             }
-
             setButtonFavorite(isFavorited)
-            binding.ivFavorite.setOnClickListener{
+            binding.ivFavorite.setOnClickListener {
                 val entity = username?.let { FavUserEntity(it, avatarUrl, false) }
-                if (entity != null) favViewModel.saveDeleteUser(entity, listFavorite.any {
+                if (entity != null) favViewModel.saveOrDeleteUser(entity, listFavorite.any {
                     it.username == username
                 })
 
             }
         }
-
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -89,22 +89,33 @@ class DetailUserActivity : AppCompatActivity() {
             binding.icFollowing.visibility = View.VISIBLE
         }
     }
-    private fun setButtonFavorite(isFavorited : Boolean){
-        binding.ivFavorite.apply{
-            if(isFavorited){
+
+    private fun setButtonFavorite(isFavorited: Boolean) {
+        binding.ivFavorite.apply {
+            if (isFavorited) {
                 setBackgroundDrawable(
                     ContextCompat.getDrawable(
-                        this@DetailUserActivity,R.drawable.ic_favorite_fill
+                        this@DetailUserActivity, R.drawable.ic_favorite_fill
                     )
                 )
-        }else{
+            } else {
                 setBackgroundDrawable(
                     ContextCompat.getDrawable(
-                        this@DetailUserActivity,R.drawable.ic_favorrite_unclick
+                        this@DetailUserActivity, R.drawable.ic_favorrite_unclick
                     )
                 )
             }
+        }
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     companion object {
@@ -114,7 +125,6 @@ class DetailUserActivity : AppCompatActivity() {
         private val TAB_TITLES = intArrayOf(
             R.string.tab_text_1,
             R.string.tab_text_2
-
         )
     }
 }

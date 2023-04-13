@@ -1,7 +1,6 @@
 package com.ichsanalfian.mygithubuser.api
 
 
-
 import com.ichsanalfian.mygithubuser.BuildConfig
 import com.ichsanalfian.mygithubuser.model.DetailUserResponse
 import com.ichsanalfian.mygithubuser.model.GithubResponse

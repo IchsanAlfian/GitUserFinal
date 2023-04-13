@@ -10,7 +10,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        buildConfigField("String", "KEY", '"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"')
+        buildConfigField("String", "KEY", '"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"')
         applicationId "com.ichsanalfian.mygithubuser"
         minSdk 21
         targetSdk 33
@@ -39,6 +39,12 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.test.espresso:espresso-contrib:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation "androidx.room:room-ktx:2.5.1"
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
 

@@ -7,13 +7,11 @@ import com.ichsanalfian.mygithubuser.local.entity.FavUserEntity
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel(private val repository: FavUserRepository) : ViewModel() {
-
-    fun getFavoritedUser() = repository.getFavoriteUser()
-
-    fun saveDeleteUser(fav: FavUserEntity, isFavorited: Boolean) {
+    fun getUserFavorited() = repository.getFavoriteUser()
+    fun saveOrDeleteUser(fav: FavUserEntity, isFavorited: Boolean) {
         viewModelScope.launch {
             if (isFavorited) {
-                repository.deleteFavoriteUser(fav, false)
+                repository.deleteFavoritedUser(fav, false)
             } else {
                 repository.setFavoritedUser(fav, true)
             }

@@ -16,12 +16,6 @@ import com.ichsanalfian.mygithubuser.viewmodel.DetailuserViewModel
 class FollowFragment : Fragment() {
     private lateinit var adapter: UserAdapter
     private val viewmodel by activityViewModels<DetailuserViewModel>()
-
-    companion object {
-        const val ARG_POSITION = "position"
-        const val ARG_USERNAME = "username"
-    }
-
     private lateinit var binding: FragmentFollowBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -49,14 +43,12 @@ class FollowFragment : Fragment() {
                         if (data.followers == 0) {
                             binding.tvErrorMSG.text = String.format("No Followers Found")
                             showErrorMSG(true)
-
                         } else {
                             showErrorMSG(false)
                         }
                     }
                 }
             }
-
         } else {
             viewmodel.getFollowing("$username")
             showRecyclerView()
@@ -72,7 +64,6 @@ class FollowFragment : Fragment() {
                         if (data.following == 0) {
                             binding.tvErrorMSG.text = String.format("No Followings Found")
                             showErrorMSG(true)
-
                         } else {
                             showErrorMSG(false)
                         }
@@ -104,5 +95,10 @@ class FollowFragment : Fragment() {
     private fun showErrorMSG(errorVisible: Boolean) {
         binding.IVErrorMSG.visibility = if (errorVisible) View.VISIBLE else View.INVISIBLE
         binding.tvErrorMSG.visibility = if (errorVisible) View.VISIBLE else View.INVISIBLE
+    }
+
+    companion object {
+        const val ARG_POSITION = "position"
+        const val ARG_USERNAME = "username"
     }
 }

@@ -10,8 +10,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.size
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +23,10 @@ import com.ichsanalfian.mygithubuser.R
 import com.ichsanalfian.mygithubuser.adapter.UserAdapter
 import com.ichsanalfian.mygithubuser.databinding.ActivityMainBinding
 import com.ichsanalfian.mygithubuser.model.ItemsItem
-import com.ichsanalfian.mygithubuser.viewmodel.FavoriteViewModel
-import com.ichsanalfian.mygithubuser.viewmodel.MainViewModel
-import com.ichsanalfian.mygithubuser.viewmodel.ViewModelFactory
+import com.ichsanalfian.mygithubuser.setting.SettingPreferences
+import com.ichsanalfian.mygithubuser.viewmodel.*
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         factory = ViewModelFactory.getInstance(this)
-        mainViewModel.getUser("arif")
+        mainViewModel.getUser("aldi")
         showRecyclerView()
         mainViewModel.listUser.observe(this) { user ->
             setUserData(user)
@@ -42,8 +47,20 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+        val pref = SettingPreferences.getInstance(dataStore)
+        val settingViewModel =
+            ViewModelProvider(this, SettingViewModelFactory(pref))[SettingViewModel::class.java]
+
+        settingViewModel.getThemeSettings().observe(this) { isDarkMode: Boolean ->
+            if (isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.favUser -> {
@@ -51,9 +68,15 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
+            R.id.setting -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                true
+            }
             else -> true
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.option_menu, menu)
